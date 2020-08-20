@@ -25,29 +25,35 @@ public class OVRGrabbable : MonoBehaviour
     [SerializeField]
     protected bool m_allowOffhandGrab = true;
     [SerializeField]
-    protected bool m_snapPosition = false;
+    public bool m_snapPosition = false;
     [SerializeField]
     protected bool m_snapOrientation = false;
     [SerializeField]
     protected Transform m_snapOffset;
-    [SerializeField]
-    protected Collider[] m_grabPoints = null;
+    public Collider[] m_grabPoints = null;
 
+
+    public bool checkToGrab = false;
     protected bool m_grabbedKinematic = false;
     protected Collider m_grabbedCollider = null;
     protected OVRGrabber m_grabbedBy = null;
-
-	/// <summary>
-	/// If true, the object can currently be grabbed.
-	/// </summary>
+    /// <summary>
+    /// If true, the object can currently be grabbed.
+    /// </summary>
     public bool allowOffhandGrab
     {
         get { return m_allowOffhandGrab; }
     }
-
-	/// <summary>
-	/// If true, the object is currently grabbed.
-	/// </summary>
+    public void Initialize(bool snapPosition, bool snapOrientation, Collider[] grabPoints)
+    {
+        m_snapPosition = snapPosition;
+        m_snapOrientation = snapOrientation;
+        m_grabPoints = grabPoints;
+    }
+    
+    /// <summary>
+    /// If true, the object is currently grabbed.
+    /// </summary>
     public bool isGrabbed
     {
         get { return m_grabbedBy != null; }
@@ -130,19 +136,28 @@ public class OVRGrabbable : MonoBehaviour
         rb.angularVelocity = angularVelocity;
         m_grabbedBy = null;
         m_grabbedCollider = null;
+        checkToGrab = true;
     }
-
+    virtual public void CustomGrabCollider(Collider collider)
+    {
+        m_grabPoints = new Collider[1] { collider };
+    }
     void Awake()
     {
+        Collider collider = this.GetComponent<Collider>();
+
+        if (m_grabPoints == null) {
+            CustomGrabCollider(collider);
+        }
         if (m_grabPoints.Length == 0)
         {
             // Get the collider from the grabbable
-            Collider collider = this.GetComponent<Collider>();
+             /*
             if (collider == null)
             {
 				throw new ArgumentException("Grabbables cannot have zero grab points and no collider -- please add a grab point or collider.");
             }
-
+            */
             // Create a default grab point
             m_grabPoints = new Collider[1] { collider };
         }

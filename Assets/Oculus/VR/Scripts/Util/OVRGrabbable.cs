@@ -37,6 +37,9 @@ public class OVRGrabbable : MonoBehaviour
     protected bool m_grabbedKinematic = false;
     protected Collider m_grabbedCollider = null;
     protected OVRGrabber m_grabbedBy = null;
+
+    public  bool GrabToObject;
+
     /// <summary>
     /// If true, the object can currently be grabbed.
     /// </summary>
@@ -123,21 +126,34 @@ public class OVRGrabbable : MonoBehaviour
         m_grabbedBy = hand;
         m_grabbedCollider = grabPoint;
         gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        gameObject.GetComponent<AudioSource>().Play(); ///////////////////////////////////////////////////////////////////////////
     }
-
-	/// <summary>
-	/// Notifies the object that it has been released.
-	/// </summary>
-	virtual public void GrabEnd(Vector3 linearVelocity, Vector3 angularVelocity)
+   
+    /// <summary>
+    /// Notifies the object that it has been released.
+    /// 잡고 놓았을때 실행되는 메소드 찾음!!
+    /// </summary>
+    virtual public void GrabEnd(Vector3 linearVelocity, Vector3 angularVelocity)
     {
         Rigidbody rb = gameObject.GetComponent<Rigidbody>();
         rb.isKinematic = m_grabbedKinematic;
         rb.velocity = linearVelocity;
         rb.angularVelocity = angularVelocity;
+        /*
+        Material newMat = Resources.Load("BasicMaterial", typeof(Material)) as Material;
+        PhysicMaterial physicMaterial = Resources.Load("Bonce", typeof(PhysicMaterial)) as PhysicMaterial;
+        gameObject.GetComponent<Renderer>().material = newMat;
+        gameObject.GetComponent<Collider>().material = physicMaterial;
+        */
+        gameObject.GetComponent<AudioSource>().Play(); ///////////////////////////////////////////////////////////////////////////
+
         m_grabbedBy = null;
         m_grabbedCollider = null;
         checkToGrab = true;
     }
+
+
+
     virtual public void CustomGrabCollider(Collider collider)
     {
         m_grabPoints = new Collider[1] { collider };

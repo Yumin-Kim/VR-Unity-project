@@ -73,12 +73,14 @@ public class OVRGrabber : MonoBehaviour
     protected Quaternion m_anchorOffsetRotation;
     protected Vector3 m_anchorOffsetPosition;
     protected float m_prevFlex;
+    protected float m_prevFlex1;
 	protected OVRGrabbable m_grabbedObj = null;
     protected Vector3 m_grabbedObjectPosOff;
     protected Quaternion m_grabbedObjectRotOff;
 	protected Dictionary<OVRGrabbable, int> m_grabCandidates = new Dictionary<OVRGrabbable, int>();
 	protected bool m_operatingWithoutOVRCameraRig = true;
 
+    public static bool CheckThisGrab;
     /// <summary>
     /// The currently grabbed object.
     /// </summary>
@@ -169,6 +171,7 @@ public class OVRGrabber : MonoBehaviour
         m_lastRot = transform.rotation;
 
 		float prevFlex = m_prevFlex;
+
 		// Update values from inputs
 		m_prevFlex = OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger, m_controller);
 
@@ -220,12 +223,13 @@ public class OVRGrabber : MonoBehaviour
 
     protected void CheckForGrabOrRelease(float prevFlex)
     {
-        if ((m_prevFlex >= grabBegin) && (prevFlex < grabBegin))
+        if ((m_prevFlex >= grabBegin)&& (prevFlex < grabBegin))
         {
             GrabBegin();
         }
-        else if ((m_prevFlex <= grabEnd) && (prevFlex > grabEnd))
+        else if ((m_prevFlex <= grabEnd)&&  (prevFlex > grabEnd))
         {
+            CheckThisGrab = true;
             GrabEnd();
         }
     }
@@ -235,9 +239,8 @@ public class OVRGrabber : MonoBehaviour
         float closestMagSq = float.MaxValue;
 		OVRGrabbable closestGrabbable = null;
         Collider closestGrabbableCollider = null;
-
         // Iterate grab candidates and find the closest grabbable candidate
-		foreach (OVRGrabbable grabbable in m_grabCandidates.Keys)
+        foreach (OVRGrabbable grabbable in m_grabCandidates.Keys)
         {
             bool canGrab = !(grabbable.isGrabbed && !grabbable.allowOffhandGrab);
             if (!canGrab)
@@ -262,7 +265,6 @@ public class OVRGrabber : MonoBehaviour
 
         // Disable grab volumes to prevent overlaps
         GrabVolumeEnable(false);
-
         if (closestGrabbable != null)
         {
             if (closestGrabbable.isGrabbed)
@@ -272,12 +274,13 @@ public class OVRGrabber : MonoBehaviour
 
             m_grabbedObj = closestGrabbable;
             m_grabbedObj.GrabBegin(this, closestGrabbableCollider);
+            CheckThisGrab = false;
 
             m_lastPos = transform.position;
             m_lastRot = transform.rotation;
 
             // Set up offsets for grabbed object desired position relative to hand.
-            if(m_grabbedObj.snapPosition)
+            if (m_grabbedObj.snapPosition)
             {
                 m_grabbedObjectPosOff = m_gripTransform.localPosition;
                 if(m_grabbedObj.snapOffset)
@@ -326,10 +329,11 @@ public class OVRGrabber : MonoBehaviour
         {
             return;
         }
-
         Rigidbody grabbedRigidbody = m_grabbedObj.grabbedRigidbody;
         Vector3 grabbablePosition = pos + rot * m_grabbedObjectPosOff;
         Quaternion grabbableRotation = rot * m_grabbedObjectRotOff;
+        CheckThisGrab = false;
+
 
         if (forceTeleport)
         {
@@ -354,7 +358,6 @@ public class OVRGrabber : MonoBehaviour
 			OVRPose trackingSpace = transform.ToOVRPose() * localPose.Inverse();
 			Vector3 linearVelocity = trackingSpace.orientation * OVRInput.GetLocalControllerVelocity(m_controller);
 			Vector3 angularVelocity = trackingSpace.orientation * OVRInput.GetLocalControllerAngularVelocity(m_controller);
-
             GrabbableRelease(linearVelocity, angularVelocity);
         }
 
@@ -365,7 +368,7 @@ public class OVRGrabber : MonoBehaviour
     protected void GrabbableRelease(Vector3 linearVelocity, Vector3 angularVelocity)
     {
         m_grabbedObj.GrabEnd(linearVelocity, angularVelocity);
-        if(m_parentHeldObject) m_grabbedObj.transform.parent = null;
+        if (m_parentHeldObject) m_grabbedObj.transform.parent = null;
         SetPlayerIgnoreCollision(m_grabbedObj.gameObject, false);
         m_grabbedObj = null;
     }
@@ -376,7 +379,6 @@ public class OVRGrabber : MonoBehaviour
         {
             return;
         }
-
         m_grabVolumeEnabled = enabled;
         for (int i = 0; i < m_grabVolumes.Length; ++i)
         {

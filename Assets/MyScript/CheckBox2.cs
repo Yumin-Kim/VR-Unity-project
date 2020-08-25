@@ -25,11 +25,11 @@ public class CheckBox2 : MonoBehaviour
         CheckRayCast();
 
     }
-
+    public float grabEnd = 0.35f;
     private void CheckRayCast()
     {
-        checkBox2Vaild = false;
-        if (OVRGrabber.CheckThisGrab)
+        float ab = OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger);
+        if (ab <= grabEnd)
         {
             if (Physics.Raycast(transform.position, transform.up, out hit))
             {

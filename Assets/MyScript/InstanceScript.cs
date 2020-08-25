@@ -16,6 +16,8 @@ public class InstanceScript : MonoBehaviour
     public static int G_Count;
     public GameObject[] images;
     public AudioClip[] audioClips;
+    public static Texture[] TextureCollect;
+    public static bool ChangeImageBool;
     public static GameObject[] ob;
     public static List<GameObject> DestoryObjectList;
     
@@ -23,11 +25,12 @@ public class InstanceScript : MonoBehaviour
     {
         //파일 Resource에서 로드
         ob = Resources.LoadAll<GameObject>("3DObject"); // 모든 객체 로드
+        DestoryObjectList = new List<GameObject>();
         audioClips = Resources.LoadAll<AudioClip>("Music");
-        for (int i = 0; i < audioClips.Length; i++)
+        TextureCollect = Resources.LoadAll<Texture>("Images"); 
+        for (int i = 0; i < TextureCollect.Length; i++)
         {
-            Debug.Log(audioClips[i].name.Split('_')[0]);
-            Debug.Log(audioClips[i].name.Split('_')[0] == "3");
+            Debug.Log(">>>" + TextureCollect[i]);
         }
         /*
         bgm = Resources.Load<AudioClip>("1_볼견");
@@ -37,10 +40,11 @@ public class InstanceScript : MonoBehaviour
         audio.volume = 1.0f; //0.0f ~ 1.0f사이의 숫자로 볼륨을 조절
         audio.Play();
         */
-        DestoryObjectList = new List<GameObject>();                                               
         n_ChangeVariable = false;
         G_Count = 0;
+        ChangeImageBool = true;
         InstanceGameObject(G_Count);
+
     }
 
 
@@ -68,10 +72,12 @@ public class InstanceScript : MonoBehaviour
             {
                 DestoryGameObject(G_Count * 4 );
             }
+            ChangeImageBool = false;
         }
         if (n_ChangeVariable)
         {
             G_Count++;
+            ChangeImageBool = true;
             CheckBox.checkBox1Valid = false;
             CheckBox2.checkBox2Vaild = false;
             n_ChangeVariable = false;
@@ -97,7 +103,7 @@ public class InstanceScript : MonoBehaviour
             DestoryObjectList.Add(instanceOfGameObject);
             XAxis++;
         }
-        OVRGrabber.CheckThisGrab = false;
+
     }
 
 }

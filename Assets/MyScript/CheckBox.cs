@@ -30,7 +30,7 @@ public class CheckBox : MonoBehaviour
     public float grabEnd = 0.35f;
     private void CheckRayCast()
     {
-        float ab = OVRInput.Get(OVRInput.Axis1D.SecondaryHandTrigger);
+        float ab = OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger);
         checkBox1Valid = false;
         if (ab <= grabEnd)
         //if (OVRGrabber.CheckThisGrab)

@@ -18,17 +18,4 @@
 *.booproj
 .vs/
 
-# Unity3D generated meta files
-*.pidb.meta
 
-# Unity3D Generated File On Crash Reports
-sysinfo.txt
-
-# Others
-.DS_Store
-/Assets/AssetStoreTools*
-/Assets/Extensions*
-/Assets/OVR
-/Assets/OvrAvatar
-/Assets/Plugins
-/*.log

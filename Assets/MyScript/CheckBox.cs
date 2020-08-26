@@ -32,8 +32,8 @@ public class CheckBox : MonoBehaviour
     {
         float ab = OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger);
         checkBox1Valid = false;
-        if (ab <= grabEnd)
-        //if (OVRGrabber.CheckThisGrab)
+        //iif (ab <= grabEnd)
+        if(OVRGrabber.CheckThisGrab)
         {
             if (Physics.Raycast(transform.position, transform.up, out hit))
             {

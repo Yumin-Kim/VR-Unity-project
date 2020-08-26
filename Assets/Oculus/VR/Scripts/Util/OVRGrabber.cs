@@ -226,11 +226,12 @@ public class OVRGrabber : MonoBehaviour
         if ((m_prevFlex >= grabBegin)&& (prevFlex < grabBegin))
         {
             GrabBegin();
+            CheckThisGrab = false;
         }
         else if ((m_prevFlex <= grabEnd)&&  (prevFlex > grabEnd))
         {
-            CheckThisGrab = true;
             GrabEnd();
+            CheckThisGrab = true;
         }
     }
 
@@ -274,7 +275,6 @@ public class OVRGrabber : MonoBehaviour
 
             m_grabbedObj = closestGrabbable;
             m_grabbedObj.GrabBegin(this, closestGrabbableCollider);
-            CheckThisGrab = false;
 
             m_lastPos = transform.position;
             m_lastRot = transform.rotation;
@@ -332,7 +332,6 @@ public class OVRGrabber : MonoBehaviour
         Rigidbody grabbedRigidbody = m_grabbedObj.grabbedRigidbody;
         Vector3 grabbablePosition = pos + rot * m_grabbedObjectPosOff;
         Quaternion grabbableRotation = rot * m_grabbedObjectRotOff;
-        CheckThisGrab = false;
 
 
         if (forceTeleport)

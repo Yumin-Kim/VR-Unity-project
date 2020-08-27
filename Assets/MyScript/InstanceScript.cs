@@ -3,7 +3,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 using VrGrabber;
+
 public class InstanceScript : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -19,85 +21,101 @@ public class InstanceScript : MonoBehaviour
     public static Texture[] TextureCollect;
     public static bool ChangeImageBool;
     public static GameObject[] ob;
+    public static GameObject[] ob1;
     public static List<GameObject> DestoryObjectList;
-    
+
+    private int Checkofindex;
+    private int random;
+
     void Start()
     {
         //파일 Resource에서 로드
         ob = Resources.LoadAll<GameObject>("3DObject"); // 모든 객체 로드
+        ob1 = Resources.LoadAll<GameObject>("3DObj"); // 모든 객체 로드
         DestoryObjectList = new List<GameObject>();
         audioClips = Resources.LoadAll<AudioClip>("Music");
-        TextureCollect = Resources.LoadAll<Texture>("Images"); 
-        for (int i = 0; i < TextureCollect.Length; i++)
+        TextureCollect = Resources.LoadAll<Texture>("Images");
+        int a = 0;
+        for (int i = 0; i < ob1.Length; i++)
         {
-            Debug.Log(">>>" + TextureCollect[i]);
+            a = Int32.Parse(ob1[i].name.Split('_')[0]);
+            Debug.Log(">>>" + a);
         }
-        /*
-        bgm = Resources.Load<AudioClip>("1_볼견");
-        Debug.Log(bgm);
-        audio = gameObject.AddComponent<AudioSource>();
-        audio.clip = bgm;
-        audio.volume = 1.0f; //0.0f ~ 1.0f사이의 숫자로 볼륨을 조절
-        audio.Play();
-        */
+
+        Checkofindex = 0;
         n_ChangeVariable = false;
         G_Count = 0;
         ChangeImageBool = true;
         InstanceGameObject(G_Count);
-
+        //ContactConfirmScript.checkBox1Valid = true;
     }
+    /// <summary>
+    /// update 문에서 참일때 쓰레드 생성 하여 descsoty하기 전에 lock걸고 동작후에 다른 동작 할  수 있게끔 
+    /// </summary>
 
-
-    private void DestoryGameObject(int index)
+    private float fDestroyTime = 1f;
+    private float fTickTime;
+    private bool DestoryGameObject(int index)
     {
-        for (int i = index; i < (index + 4); i++)
+        Checkofindex = 0;
+        if (index != 0)
         {
-            Destroy(DestoryObjectList[i]);
+            Checkofindex = G_Count * 4;
         }
-        n_ChangeVariable = true;
+        Debug.Log(Checkofindex + ">>>>>>");
+        for (int i = Checkofindex; i < (Checkofindex + 4); i++)
+        {
+                       Destroy(DestoryObjectList[i],0.1f);
+            //DestoryObjectList[i].SetActive(false);
+        }
+        return true;
     }
 
-
+    private bool asd;
     // Update is called once per frame
-    private void FixedUpdate()
+    private void LateUpdate()
     {
-        if (CheckBox.checkBox1Valid && CheckBox2.checkBox2Vaild)
-        //if (CheckBox2.checkBox2Vaild)
+
+        if (ContactConfirmScript.checkBox1Valid && ContactConfirm2Script.checkBox2Valid)
         {
-            if (G_Count == 0)
-            {
-                DestoryGameObject(G_Count);
-            }
-            else
-            {
-                DestoryGameObject(G_Count * 4 );
-            }
             ChangeImageBool = false;
-        }
-        if (n_ChangeVariable)
-        {
-            G_Count++;
+            fTickTime = 0f;
+            DestoryGameObject(G_Count);
             ChangeImageBool = true;
-            CheckBox.checkBox1Valid = false;
-            CheckBox2.checkBox2Vaild = false;
-            n_ChangeVariable = false;
+            G_Count++;
             InstanceGameObject((G_Count * 4));
+            ContactConfirmScript.checkBox1Valid = false;
+            ContactConfirm2Script.checkBox2Valid = false;
         }
+
     }
     //게임 오브젝트마다 해당하는 노래 추가
     private void InstanceGameObject(int counter)
     {
+        Debug.Log(counter);
         float XAxis = -1.5f, YAxis = 0.5f, ZAxis = 2;
         for (int i = counter; i < counter + 4; i++)
         {
+            //random = Random.Range(-2,2);
+            //random * 0.2f *
+            if (ZAxis > 0.4f)
+            {
+                ZAxis = -0.5f;
+            }
+            else
+            {
+                ZAxis = 0.5f;
+
+            }
             ob[i].transform.position = new Vector3(XAxis, YAxis, ZAxis);
             instanceOfGameObject = Instantiate(ob[i]);
+            //instanceOfGameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             collide = instanceOfGameObject.AddComponent<BoxCollider>();
+            //collide.size = new Vector3()
             audioSourece = instanceOfGameObject.AddComponent<AudioSource>();
             instanceOfGameObject.AddComponent<Rigidbody>().useGravity = true;
             audioSourece.clip = audioClips[i];
             audioSourece.volume = 1.0f;
-
             grab = instanceOfGameObject.AddComponent<OVRGrabbable>();
             grab.CustomGrabCollider(collide);
             DestoryObjectList.Add(instanceOfGameObject);

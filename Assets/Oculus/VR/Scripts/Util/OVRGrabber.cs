@@ -25,7 +25,7 @@ public class OVRGrabber : MonoBehaviour
 {
     // Grip trigger thresholds for picking up objects, with some hysteresis.
     public float grabBegin = 0.55f;
-    public float grabEnd = 0.35f;
+    public static float grabEnd = 0.35f;
 
     bool alreadyUpdated = false;
 
@@ -72,9 +72,9 @@ public class OVRGrabber : MonoBehaviour
     protected Quaternion m_lastRot;
     protected Quaternion m_anchorOffsetRotation;
     protected Vector3 m_anchorOffsetPosition;
-    protected float m_prevFlex;
-    protected float m_prevFlex1;
-	protected OVRGrabbable m_grabbedObj = null;
+    public  float m_prevFlex;
+    public  float prevFlex;
+    protected OVRGrabbable m_grabbedObj = null;
     protected Vector3 m_grabbedObjectPosOff;
     protected Quaternion m_grabbedObjectRotOff;
 	protected Dictionary<OVRGrabbable, int> m_grabCandidates = new Dictionary<OVRGrabbable, int>();
@@ -170,10 +170,10 @@ public class OVRGrabber : MonoBehaviour
         m_lastPos = transform.position;
         m_lastRot = transform.rotation;
 
-		float prevFlex = m_prevFlex;
+		prevFlex = m_prevFlex;
 
 		// Update values from inputs
-		m_prevFlex = OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger, m_controller);
+		m_prevFlex = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, m_controller);
 
 		CheckForGrabOrRelease(prevFlex);
     }
@@ -220,23 +220,22 @@ public class OVRGrabber : MonoBehaviour
             m_grabCandidates.Remove(grabbable);
         }
     }
-
+    //잡는 놓는 메소드
     protected void CheckForGrabOrRelease(float prevFlex)
     {
         if ((m_prevFlex >= grabBegin)&& (prevFlex < grabBegin))
         {
             GrabBegin();
-            CheckThisGrab = false;
         }
         else if ((m_prevFlex <= grabEnd)&&  (prevFlex > grabEnd))
         {
             GrabEnd();
-            CheckThisGrab = true;
         }
     }
 
     protected virtual void GrabBegin()
     {
+        CheckThisGrab = false;
         float closestMagSq = float.MaxValue;
 		OVRGrabbable closestGrabbable = null;
         Collider closestGrabbableCollider = null;
@@ -359,9 +358,10 @@ public class OVRGrabber : MonoBehaviour
 			Vector3 angularVelocity = trackingSpace.orientation * OVRInput.GetLocalControllerAngularVelocity(m_controller);
             GrabbableRelease(linearVelocity, angularVelocity);
         }
-
         // Re-enable grab volumes to allow overlap events
         GrabVolumeEnable(true);
+        CheckThisGrab = true;
+
     }
 
     protected void GrabbableRelease(Vector3 linearVelocity, Vector3 angularVelocity)

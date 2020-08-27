@@ -36,10 +36,6 @@ public class AddVRComponenets : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        OVRGrabbable vr = new OVRGrabbable();
-        if(vr.checkToGrab == true)
-        {
-            this.transform.position = new Vector3(2, 2, 2);
-        }
+        
     }
 }

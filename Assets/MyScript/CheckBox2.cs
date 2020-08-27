@@ -30,8 +30,8 @@ public class CheckBox2 : MonoBehaviour
     {
         float ab = OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger);
         //if (ab <= grabEnd)
-        if (OVRGrabber.CheckThisGrab)
-        {
+       // if (OVRGrabber.CheckThisGrab)
+        //{
             if (Physics.Raycast(transform.position, transform.up, out hit))
             {
                 if (hit.distance < 0.7f)
@@ -61,7 +61,7 @@ public class CheckBox2 : MonoBehaviour
 
                 }
 
-            }
+          //  }
         }
     }
 }

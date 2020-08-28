@@ -47,7 +47,12 @@ public class InstanceScript : MonoBehaviour
         G_Count = 0;
         ChangeImageBool = true;
         InstanceGameObject(G_Count);
-        //ContactConfirmScript.checkBox1Valid = true;
+        /*
+                ContactConfirmScript.checkBox1Valid = true;
+                ContactConfirm2Script.checkBox2Valid = true;
+                ContactConfirm3Script.checkBox3Valid = true;
+                ContactConfirm4Script.checkBox4Valid = true;
+                */
     }
     /// <summary>
     /// update 문에서 참일때 쓰레드 생성 하여 descsoty하기 전에 lock걸고 동작후에 다른 동작 할  수 있게끔 
@@ -65,27 +70,54 @@ public class InstanceScript : MonoBehaviour
         Debug.Log(Checkofindex + ">>>>>>");
         for (int i = Checkofindex; i < (Checkofindex + 4); i++)
         {
-                       Destroy(DestoryObjectList[i],0.1f);
-            //DestoryObjectList[i].SetActive(false);
+            //Destroy(DestoryObjectList[i],0.1f);
+            DestoryObjectList[i].SetActive(false);
         }
         return true;
     }
 
     private bool asd;
+    float timer;
+    float timer1;
+
+    bool Hello;
+    bool Hello1;
     // Update is called once per frame
     private void LateUpdate()
     {
-
-        if (ContactConfirmScript.checkBox1Valid && ContactConfirm2Script.checkBox2Valid)
+        if (Hello)
         {
+            timer += Time.deltaTime;
+        }
+        if (Hello1)
+        {
+            timer1 += Time.deltaTime;
+        }
+        Debug.Log(" timer    : " + timer + " seconds");
+        if (ContactConfirmScript.checkBox1Valid && ContactConfirm2Script.checkBox2Valid && ContactConfirm3Script.checkBox3Valid && ContactConfirm4Script.checkBox4Valid)
+        {
+            Hello = true;
+            Hello1 = true;
             ChangeImageBool = false;
-            fTickTime = 0f;
+            
+            ContactConfirmScript.checkBox1Valid = false;
+            ContactConfirm2Script.checkBox2Valid = false;
+            ContactConfirm3Script.checkBox3Valid = false;
+            ContactConfirm4Script.checkBox4Valid = false;
+        }
+        if (timer1 > 1f)
+        {
+            Hello1 = false;
+            timer1 = 0;
             DestoryGameObject(G_Count);
             ChangeImageBool = true;
             G_Count++;
+        }
+        if (timer > 1.5f)
+        {
+            Hello = false;
+            timer = 0f;
             InstanceGameObject((G_Count * 4));
-            ContactConfirmScript.checkBox1Valid = false;
-            ContactConfirm2Script.checkBox2Valid = false;
         }
 
     }
@@ -108,10 +140,11 @@ public class InstanceScript : MonoBehaviour
 
             }
             ob[i].transform.position = new Vector3(XAxis, YAxis, ZAxis);
+            //ob[i].transform.localScale= new Vector3(0.5f, 0.5f, 0.5f);
             instanceOfGameObject = Instantiate(ob[i]);
-            //instanceOfGameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            instanceOfGameObject.transform.localScale = new Vector3(50f, 50f, 50f);
             collide = instanceOfGameObject.AddComponent<BoxCollider>();
-            //collide.size = new Vector3()
+            //collide.size = new Vector3();
             audioSourece = instanceOfGameObject.AddComponent<AudioSource>();
             instanceOfGameObject.AddComponent<Rigidbody>().useGravity = true;
             audioSourece.clip = audioClips[i];

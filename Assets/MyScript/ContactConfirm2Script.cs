@@ -40,7 +40,7 @@ public class ContactConfirm2Script : MonoBehaviour
                 col.GetComponent<Renderer>().material = newMat11;
                 col.gameObject.GetComponent<Rigidbody>().useGravity = false;
                 col.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-                col.gameObject.transform.position = this.gameObject.transform.position + new Vector3(-0.45f, -0.2f, -0.3f);
+                col.gameObject.transform.position = this.gameObject.transform.position + new Vector3(-0.2f, -0.15f, -0.15f);
                 col.gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
                 checkBox2Valid = true;
             }

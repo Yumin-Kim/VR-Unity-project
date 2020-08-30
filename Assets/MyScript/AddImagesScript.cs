@@ -18,9 +18,9 @@ public class AddImagesScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(InstanceScript.ChangeImageBool)
-        {
-            gameObject.GetComponent<Renderer>().material.mainTexture = InstanceScript.TextureCollect[InstanceScript.G_Count];
-        }
+                if(InstanceScript.ChangeImageBool)
+                {
+                    gameObject.GetComponent<Renderer>().material.mainTexture = InstanceScript.TextureCollect[InstanceScript.G_Count];
+                }
     }
 }

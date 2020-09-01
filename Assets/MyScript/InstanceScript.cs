@@ -179,7 +179,7 @@ public class InstanceScript : MonoBehaviour
             }
             else
             {
-                GameObject.Find("Cube (3)").GetComponent<AudioSource>().clip = audioClips[i];
+                GameObject.Find("Cylinder (6)").GetComponent<AudioSource>().clip = audioClips[i];
             }
         }
 

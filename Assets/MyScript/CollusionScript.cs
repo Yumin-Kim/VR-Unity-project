@@ -22,6 +22,8 @@ public class CollusionScript : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        
+        Material newMat = Resources.Load("DEV_Orange", typeof(Material)) as Material;
+        other.gameObject.GetComponent<Renderer>().material = newMat;
+        OVRchildClass grab = new OVRchildClass();
     }
 }

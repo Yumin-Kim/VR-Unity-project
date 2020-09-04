@@ -2,21 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AddOVRScript :  OVRGrabber
+public class AddOVRScript : MonoBehaviour
 {
-    protected OVRGrabber m_grabbedBy = null;
-
     // Start is called before the first frame update
 
     private void OnCollisionEnter(Collision collision)
     {
-   if (other.gameObject.name == "01-1(Clone)")
+        if (collision.gameObject.name == "01-1(Clone)")
         {
-            base.GrabEnd();
+            /*
+                        Material newMat = Resources.Load("DEV_Orange", typeof(Material)) as Material;
+                        collision.gameObject.GetComponent<Renderer>().material = newMat;
+                        collision.gameObject.GetComponent<OVRGrabbable>().enabled = false; 
+                        OVRchildClass grab = new OVRchildClass();
+                        grab.EndGrabChildMethod();
+                        grab.Debbuf();
+                        */
         }
     }
     private void OnTriggerEnter(Collider other)
     {
-        
+
     }
 }

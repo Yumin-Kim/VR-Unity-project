@@ -10,7 +10,8 @@ public class CreateNewObject : MonoBehaviour
     {
         GameObject[] ob2 = Resources.LoadAll<GameObject>("3DObj");
         Debug.Log(ob2[2]);
-        Instantiate(ob2[2],this.transform);
+        Instantiate(ob2[2], this.transform).gameObject.SetActive(false);
+        Instantiate(ob2[1], this.transform).gameObject.SetActive(false);
         Instantiate(ob2[5],this.transform);
         //asd.transform.position = new Vector3(10f, 10f, 10f);
     }

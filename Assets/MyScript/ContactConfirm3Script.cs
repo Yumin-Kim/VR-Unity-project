@@ -32,7 +32,7 @@ public class ContactConfirm3Script : MonoBehaviour
             num = InstanceScript.G_Count * 4 + 2;
         }
         Debug.Log(num);
-        if (OVRGrabber.CheckThisGrab && !checkBox3Valid)
+       /* if (OVRGrabber.CheckThisGrab && !checkBox3Valid)
         //if (OVRGrabbable.checkToGrab)
         {
             if (col.gameObject.name.Split('(')[0] == InstanceScript.ob[num].name)
@@ -50,6 +50,6 @@ public class ContactConfirm3Script : MonoBehaviour
                 newMat11 = Resources.Load("MaterialA", typeof(Material)) as Material;
                 col.GetComponent<Renderer>().material = newMat11;
             }
-        }
+        }*/
     }
 }

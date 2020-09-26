@@ -1,12 +1,12 @@
 /************************************************************************************
 Copyright : Copyright (c) Facebook Technologies, LLC and its affiliates. All rights reserved.
 
-Licensed under the Oculus Utilities SDK License Version 1.31 (the "License"); you may not use
+Licensed under the Oculus Master SDK License Version 1.0 (the "License"); you may not use
 the Utilities SDK except in compliance with the License, which is provided at the time of installation
 or download, or which otherwise accompanies this software in either electronic or hard copy form.
 
 You may obtain a copy of the License at
-https://developer.oculus.com/licenses/utilities-1.31
+https://developer.oculus.com/licenses/oculusmastersdk-1.0/
 
 Unless required by applicable law or agreed to in writing, the Utilities SDK distributed
 under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
@@ -25,7 +25,7 @@ public class OVRGrabber : MonoBehaviour
 {
     // Grip trigger thresholds for picking up objects, with some hysteresis.
     public float grabBegin = 0.55f;
-    public static float grabEnd = 0.35f;
+    public float grabEnd = 0.35f;
 
     bool alreadyUpdated = false;
 
@@ -72,15 +72,13 @@ public class OVRGrabber : MonoBehaviour
     protected Quaternion m_lastRot;
     protected Quaternion m_anchorOffsetRotation;
     protected Vector3 m_anchorOffsetPosition;
-    public  float m_prevFlex;
-    public  float prevFlex;
-    protected OVRGrabbable m_grabbedObj = null;
+    protected float m_prevFlex;
+	protected OVRGrabbable m_grabbedObj = null;
     protected Vector3 m_grabbedObjectPosOff;
     protected Quaternion m_grabbedObjectRotOff;
 	protected Dictionary<OVRGrabbable, int> m_grabCandidates = new Dictionary<OVRGrabbable, int>();
 	protected bool m_operatingWithoutOVRCameraRig = true;
 
-    public static bool CheckThisGrab;
     /// <summary>
     /// The currently grabbed object.
     /// </summary>
@@ -170,10 +168,9 @@ public class OVRGrabber : MonoBehaviour
         m_lastPos = transform.position;
         m_lastRot = transform.rotation;
 
-		prevFlex = m_prevFlex;
-
+		float prevFlex = m_prevFlex;
 		// Update values from inputs
-		m_prevFlex = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, m_controller);
+		m_prevFlex = OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger, m_controller);
 
 		CheckForGrabOrRelease(prevFlex);
     }
@@ -220,14 +217,14 @@ public class OVRGrabber : MonoBehaviour
             m_grabCandidates.Remove(grabbable);
         }
     }
-    //잡는 놓는 메소드
+
     protected void CheckForGrabOrRelease(float prevFlex)
     {
-        if ((m_prevFlex >= grabBegin)&& (prevFlex < grabBegin))
+        if ((m_prevFlex >= grabBegin) && (prevFlex < grabBegin))
         {
             GrabBegin();
         }
-        else if ((m_prevFlex <= grabEnd)&&  (prevFlex > grabEnd))
+        else if ((m_prevFlex <= grabEnd) && (prevFlex > grabEnd))
         {
             GrabEnd();
         }
@@ -235,12 +232,12 @@ public class OVRGrabber : MonoBehaviour
 
     protected virtual void GrabBegin()
     {
-        CheckThisGrab = false;
         float closestMagSq = float.MaxValue;
 		OVRGrabbable closestGrabbable = null;
         Collider closestGrabbableCollider = null;
+
         // Iterate grab candidates and find the closest grabbable candidate
-        foreach (OVRGrabbable grabbable in m_grabCandidates.Keys)
+		foreach (OVRGrabbable grabbable in m_grabCandidates.Keys)
         {
             bool canGrab = !(grabbable.isGrabbed && !grabbable.allowOffhandGrab);
             if (!canGrab)
@@ -265,6 +262,7 @@ public class OVRGrabber : MonoBehaviour
 
         // Disable grab volumes to prevent overlaps
         GrabVolumeEnable(false);
+
         if (closestGrabbable != null)
         {
             if (closestGrabbable.isGrabbed)
@@ -279,7 +277,7 @@ public class OVRGrabber : MonoBehaviour
             m_lastRot = transform.rotation;
 
             // Set up offsets for grabbed object desired position relative to hand.
-            if (m_grabbedObj.snapPosition)
+            if(m_grabbedObj.snapPosition)
             {
                 m_grabbedObjectPosOff = m_gripTransform.localPosition;
                 if(m_grabbedObj.snapOffset)
@@ -328,10 +326,10 @@ public class OVRGrabber : MonoBehaviour
         {
             return;
         }
+
         Rigidbody grabbedRigidbody = m_grabbedObj.grabbedRigidbody;
         Vector3 grabbablePosition = pos + rot * m_grabbedObjectPosOff;
         Quaternion grabbableRotation = rot * m_grabbedObjectRotOff;
-
 
         if (forceTeleport)
         {
@@ -356,18 +354,18 @@ public class OVRGrabber : MonoBehaviour
 			OVRPose trackingSpace = transform.ToOVRPose() * localPose.Inverse();
 			Vector3 linearVelocity = trackingSpace.orientation * OVRInput.GetLocalControllerVelocity(m_controller);
 			Vector3 angularVelocity = trackingSpace.orientation * OVRInput.GetLocalControllerAngularVelocity(m_controller);
+
             GrabbableRelease(linearVelocity, angularVelocity);
         }
+
         // Re-enable grab volumes to allow overlap events
         GrabVolumeEnable(true);
-        CheckThisGrab = true;
-
     }
 
     protected void GrabbableRelease(Vector3 linearVelocity, Vector3 angularVelocity)
     {
         m_grabbedObj.GrabEnd(linearVelocity, angularVelocity);
-        if (m_parentHeldObject) m_grabbedObj.transform.parent = null;
+        if(m_parentHeldObject) m_grabbedObj.transform.parent = null;
         SetPlayerIgnoreCollision(m_grabbedObj.gameObject, false);
         m_grabbedObj = null;
     }
@@ -378,6 +376,7 @@ public class OVRGrabber : MonoBehaviour
         {
             return;
         }
+
         m_grabVolumeEnabled = enabled;
         for (int i = 0; i < m_grabVolumes.Length; ++i)
         {

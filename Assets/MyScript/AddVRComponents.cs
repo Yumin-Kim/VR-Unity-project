@@ -30,7 +30,7 @@ public class AddVRComponenets : MonoBehaviour
         Collider[] newGrabPoints = new Collider[1];
         newGrabPoints[0] = collide;
         grab.enabled = true;
-        grab.CustomGrabCollider(collide);
+        //grab.CustomGrabCollider(collide);
     }
 
     // Update is called once per frame

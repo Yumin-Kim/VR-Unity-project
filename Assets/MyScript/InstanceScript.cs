@@ -151,7 +151,7 @@ public class InstanceScript : MonoBehaviour
             //audioSourece.clip = audioClips[i];
             //audioSourece.volume = 1.0f;
             grab = instanceOfGameObject.AddComponent<OVRGrabbable>();
-            grab.CustomGrabCollider(collide);
+            //grab.CustomGrabCollider(collide);
             DestoryObjectList.Add(instanceOfGameObject);
             XAxis++;
         }

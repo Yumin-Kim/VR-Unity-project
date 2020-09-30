@@ -32,7 +32,7 @@ public class ContactConfirmScript : MonoBehaviour
         //float ab = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger);
 
         //if ((OVRGrabber.m_prevFlex <= grabEnd) && (OVRGrabber.prevFlex > grabEnd))
-        if (OVRGrabbable.checkToGrab && !checkBox1Valid)
+        /*if (OVRGrabbable.checkToGrab && !checkBox1Valid)
         {
             if (col.gameObject.name.Split('(')[0] == InstanceScript.ob[num].name)
             {
@@ -49,7 +49,7 @@ public class ContactConfirmScript : MonoBehaviour
                 newMat11 = Resources.Load("MaterialA", typeof(Material)) as Material;
                 col.GetComponent<Renderer>().material = newMat11;
             }
-        }
+        }*/
     }
 
 

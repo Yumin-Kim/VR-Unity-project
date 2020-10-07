@@ -46,15 +46,7 @@ public class InstanceScript : MonoBehaviour
         G_Count = 0;
         ChangeImageBool = true;
         InstanceGameObject(G_Count);
-        // ContactConfirmScript.checkBox1Valid = true;
-
-
     }
-    /// <summary>
-    /// update 문에서 참일때 쓰레드 생성 하여 descsoty하기 전에 lock걸고 동작후에 다른 동작 할  수 있게끔 
-    /// </summary>
-
-
     private bool DestoryGameObject(int index)
     {
         Checkofindex = 0;
@@ -64,7 +56,6 @@ public class InstanceScript : MonoBehaviour
         }
         for (int i = Checkofindex; i < (Checkofindex + 4); i++)
         {
-            //Destroy(DestoryObjectList[i],0.1f);
             DestoryObjectList[i].SetActive(false);
         }
         return true;
@@ -76,7 +67,6 @@ public class InstanceScript : MonoBehaviour
 
     bool Hello;
     bool Hello1;
-    // Update is called once per frame
     private void LateUpdate()
     {
         if (Hello)
@@ -90,7 +80,6 @@ public class InstanceScript : MonoBehaviour
         if (CheckButtonTrigger)
         {
             if (ContactConfirmScript.checkBox1Valid && ContactConfirm2Script.checkBox2Valid && ContactConfirm3Script.checkBox3Valid && ContactConfirm4Script.checkBox4Valid)
-            //if (ContactConfirmScript.checkBox1Valid)
             {
                 Hello = true;
                 Hello1 = true;
@@ -100,8 +89,6 @@ public class InstanceScript : MonoBehaviour
                 ContactConfirm2Script.checkBox2Valid = false;
                 ContactConfirm3Script.checkBox3Valid = false;
                 ContactConfirm4Script.checkBox4Valid = false;
-                //ContactConfirmScript.checkBox1Valid = true;
-
             }
 
         }
@@ -122,7 +109,6 @@ public class InstanceScript : MonoBehaviour
         }
 
     }
-    //게임 오브젝트마다 해당하는 노래 추가
     private void InstanceGameObject(int counter)
     {
         if (G_Count != 0)
@@ -144,25 +130,16 @@ public class InstanceScript : MonoBehaviour
             }
             ob[i].transform.position = new Vector3(XAxis, YAxis, ZAxis);
             instanceOfGameObject = Instantiate(ob[i]);
-            instanceOfGameObject.transform.localScale = new Vector3(50f, 50f, 50f);
             collide = instanceOfGameObject.AddComponent<BoxCollider>();
             audioSourece = instanceOfGameObject.AddComponent<AudioSource>();
             instanceOfGameObject.AddComponent<Rigidbody>().useGravity = true;
-            //audioSourece.clip = audioClips[i];
-            //audioSourece.volume = 1.0f;
             grab = instanceOfGameObject.AddComponent<OVRGrabbable>();
-            //grab.CustomGrabCollider(collide);
+            grab.CustomGrabCollider(collide);
             DestoryObjectList.Add(instanceOfGameObject);
             XAxis++;
         }
-        /*
-                Debug.Log("Instance >>");
-                Debug.Log("Instance >>"+DestoryObjectList.Count);
-                */
-        Debug.Log("Instance >>" + audioCout);
         for (int i = audioCout * 5; i < (audioCout * 5) + 5; i++)
         {
-            Debug.Log(i + ">>>>>>>>>count");
             if (i < (audioCout * 5) + 4)
             {
                 if (G_Count == 0)

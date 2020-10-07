@@ -4,25 +4,13 @@ using UnityEngine;
 
 public class ContactConfirm4Script : MonoBehaviour
 {
-    // Start is called before the first frame update
     public static bool checkBox4Valid;
     private Material newMat11;
     int num;
-
-    // Start is called before the first frame update
     void Start()
     {
         num = 0;
     }
-
-    // Start is called before the first frame update
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     void OnTriggerEnter(Collider col)
     {
         num = (InstanceScript.G_Count * 4) % 4 + 3;
@@ -31,9 +19,7 @@ public class ContactConfirm4Script : MonoBehaviour
             num = InstanceScript.G_Count * 4 + 3;
         }
         Debug.Log(num);
-       /* if (OVRGrabber.CheckThisGrab && !checkBox4Valid)
-        //if (OVRGrabbable.checkToGrab)
-        {
+      
             if (col.gameObject.name.Split('(')[0] == InstanceScript.ob[num].name)
             {
                 newMat11 = Resources.Load("DEV_Orange", typeof(Material)) as Material;
@@ -49,6 +35,5 @@ public class ContactConfirm4Script : MonoBehaviour
                 newMat11 = Resources.Load("MaterialA", typeof(Material)) as Material;
                 col.GetComponent<Renderer>().material = newMat11;
             }
-        }*/
     }
 }

@@ -8,20 +8,14 @@ public class ContactConfirmScript : MonoBehaviour
     public static bool checkBox1Valid;
     private Material newMat11;
     int num;
-    // Start is called before the first frame update
     void Start()
     {
         num = 0;
     }
-
-    // Start is called before the first frame update
-
-    // Update is called once per frame
     void Update()
     {
 
     }
-
     void OnTriggerEnter(Collider col)
     {
         num = (InstanceScript.G_Count * 4) % 4;
@@ -29,10 +23,7 @@ public class ContactConfirmScript : MonoBehaviour
         {
             num = InstanceScript.G_Count * 4;
         }
-        //float ab = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger);
-
-        //if ((OVRGrabber.m_prevFlex <= grabEnd) && (OVRGrabber.prevFlex > grabEnd))
-        /*if (OVRGrabbable.checkToGrab && !checkBox1Valid)
+        if (OVRGrabbable.checkToGrab && !checkBox1Valid)
         {
             if (col.gameObject.name.Split('(')[0] == InstanceScript.ob[num].name)
             {
@@ -49,7 +40,7 @@ public class ContactConfirmScript : MonoBehaviour
                 newMat11 = Resources.Load("MaterialA", typeof(Material)) as Material;
                 col.GetComponent<Renderer>().material = newMat11;
             }
-        }*/
+        }
     }
 
 

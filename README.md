@@ -1,4 +1,3 @@
-# School_VR_OculusGo
 # 최대한 정리하면서!!
 # VR 작업하며 문제 사항들 정리
 ## OVR 관련 Class는 2019버전 관련 자료 조사
@@ -31,6 +30,8 @@ virtual public void GrabBegin(OVRGrabber hand, Collider grabPoint)
 ```
 # 최적화 관련
 * 분석중 (컴퓨터 프로파일링 결과)
+* 안드로이드 빌드시 최소화 하는 방법
+    * 
 * 최적화 진행 순서 **거의 Rendering 하는 부분에서 많은 자원을 잡아 먹는거 같음**
     1. 안드로이드 빌드 할떄 빌드 경량화
     2. 병목 현상 체크를 위해 프로파일링 진행
@@ -53,5 +54,6 @@ virtual public void GrabBegin(OVRGrabber hand, Collider grabPoint)
 1. [스레드 관련 자료](https://sweetjey.tistory.com/85) >>> [Rescource](https://stackoverflow.com/questions/58729409/unity-calling-resources-load-from-a-different-thread)
 2. [카메라범위 안에 있는 객체 확인 스레드](http://blog.naver.com/PostView.nhn?blogId=10ro&logNo=220895900463&categoryNo=0&parentCategoryNo=0&viewDate=&currentPage=1&postListTopCurrentPage=1&from=postView)
 3. [안드로이드 프로파일링 ㅈ 버그 발견](https://forum.unity.com/threads/android-device-cant-able-to-connect-with-profiler-window.663376/)
-4. []
+4. [유니티 최적화 기법](https://nogan.tistory.com/7)
+5. [유니티 안드로이드 최적화 빌드](http://batmask.net/index.php/2018/08/28/138/)
 

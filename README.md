@@ -31,7 +31,6 @@ virtual public void GrabBegin(OVRGrabber hand, Collider grabPoint)
 # 최적화 관련
 * 분석중 (컴퓨터 프로파일링 결과)
 * 안드로이드 빌드시 최소화 하는 방법
-    * 
 * 최적화 진행 순서 **거의 Rendering 하는 부분에서 많은 자원을 잡아 먹는거 같음**
     1. 안드로이드 빌드 할떄 빌드 경량화
     2. 병목 현상 체크를 위해 프로파일링 진행
@@ -56,4 +55,22 @@ virtual public void GrabBegin(OVRGrabber hand, Collider grabPoint)
 3. [안드로이드 프로파일링 ㅈ 버그 발견](https://forum.unity.com/threads/android-device-cant-able-to-connect-with-profiler-window.663376/)
 4. [유니티 최적화 기법](https://nogan.tistory.com/7)
 5. [유니티 안드로이드 최적화 빌드](http://batmask.net/index.php/2018/08/28/138/)
-
+# Oculus Intergration 보다 다른 API 이용 하기
+* [유니티 VR](https://www.youtube.com/watch?v=gGYtahQjmWQ) 
+## 11 05일
+* 수정 할 부분!
+    * 2층
+        * 게임 랜덤으로 변경 XX
+        * 음성 지원은 게임 시작 할때 마다 재생 가능하게 XX
+        * 2층에 직지 배치 - 규민 배치 >> 배치 후에 문제 발생시 해결 방안 동적으로 생성한 객체 재활용 방법
+    * 1층
+        * 책자 배치 최대한 비공간에 배치
+        * 1층 돌덩이 잡고 어느 범위안에서만 가지고 놀 수 있도록
+        * 
+    * Teleport 후에 움직아상해짐
+    * 조명 Bake 다시 진행
+    * 박스 안에 로고 배치시 3D에서 이미지로 변경
+* 디테일 추가 부분 
+    * 2층 UI 개선
+        * popup text로 게임 진행도 설명 및 스테이지 안내
+        * 

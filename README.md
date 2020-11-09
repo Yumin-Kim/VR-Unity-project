@@ -66,11 +66,9 @@ virtual public void GrabBegin(OVRGrabber hand, Collider grabPoint)
     * 1층
         * 책자 배치 최대한 비공간에 배치
         * 1층 돌덩이 잡고 어느 범위안에서만 가지고 놀 수 있도록
-        * 
     * Teleport 후에 움직아상해짐
     * 조명 Bake 다시 진행
     * 박스 안에 로고 배치시 3D에서 이미지로 변경
 * 디테일 추가 부분 
     * 2층 UI 개선
         * popup text로 게임 진행도 설명 및 스테이지 안내
-        * 

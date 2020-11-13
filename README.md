@@ -72,3 +72,9 @@ virtual public void GrabBegin(OVRGrabber hand, Collider grabPoint)
 * 디테일 추가 부분 
     * 2층 UI 개선
         * popup text로 게임 진행도 설명 및 스테이지 안내
+        * 
+# 11월 11일
+* Distance grab
+    * Oculus Distance grabbale의 예제를 통해서 grab당할 객체의 속성 세팅을 한다. rigidbody collider grabbale 등을 한다.
+    * Grab당할 객체의 layer를 세팅한다. 이유는 모르겠음 안하면 되지 않는다.
+    * **[Distance Grab OVRPlayerController Setting](https://www.youtube.com/watch?v=YN1tcDtWRh8)**   

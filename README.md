@@ -78,3 +78,11 @@ virtual public void GrabBegin(OVRGrabber hand, Collider grabPoint)
     * Oculus Distance grabbale의 예제를 통해서 grab당할 객체의 속성 세팅을 한다. rigidbody collider grabbale 등을 한다.
     * Grab당할 객체의 layer를 세팅한다. 이유는 모르겠음 안하면 되지 않는다.
     * **[Distance Grab OVRPlayerController Setting](https://www.youtube.com/watch?v=YN1tcDtWRh8)**   
+# 11월 15일
+* 기능적인 부분
+    * 물붓기 Raycast를 활용하여 구현함
+    * 
+* C# 문법 관련
+    * 외부 클래스에 접근해서 함수나 변수 쓸수있는 방법 찾아 보기
+    * 동적 할당(new) 사용하는 방법은 아닌거 같음
+    * static 사용하는 방법을 주로 사용하고 있는데 성능면 , 코드 재 사용적인 측면에서 상당히 비효율적이다.

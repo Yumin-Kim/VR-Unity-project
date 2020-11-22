@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="Gradle: org.mozilla.geckoview:geckoview-armeabi-v7a:80.0.20200818235255@aar">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/geckoview-armeabi-v7a-80.0.20200818235255.aar/3f079a3a14901d53035ad6b8be8eaa86/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/geckoview-armeabi-v7a-80.0.20200818235255.aar/3f079a3a14901d53035ad6b8be8eaa86/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/geckoview-armeabi-v7a-80.0.20200818235255.aar/3f079a3a14901d53035ad6b8be8eaa86/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/geckoview-armeabi-v7a-80.0.20200818235255.aar/3f079a3a14901d53035ad6b8be8eaa86/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mozilla.geckoview/geckoview-armeabi-v7a/80.0.20200818235255/b463103588715b6e8ce3fb5534fe364e59bdbde0/geckoview-armeabi-v7a-80.0.20200818235255-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -31,18 +31,38 @@ I implemented jikji manufacturing with undergraduate students using unity and bl
 # WebView >> VR Webview 다시 시작하기!!
 https://github.com/IanPhilips/UnityOculusAndroidVRBrowser
 
-# VR develop technology
+# Latest developed technology[VR , AI , Web]
 1. [Unity_3D_K] Oculus Intergration을 활용하여 Controller Interaction 구현[ 잡기 , 텔레포트 ]
+   * Oculus Intergration
+      * 해당 plugin보다 SteamVR 다양한 유튜브 영상 있음
+   * SteamVR 
+      * 해당 Plugin을 사용 권장!
 2. [Unity_3D_K] 아바타 SDK 사용 [응용X]
-3. [Unity_3D_K] 3DUnity 환경의 WebView[성능에 문제 많음 >> Scene전환시 오류가 발생]
-3. [Unity_3D_S] 포톤서버 농구 게임
-4. [Unity_WebGL_K] WebGL을 Oculus Grab 구현, 움직임은 미구현
-5. [Node.js_Web_K] Aframe을 활용하여 WebVR 구현
+   * 다른 수단을 통해서 사용자의 사진을 받아 서버에 저장후 unity에서 export하는 부분 구현 또는 unity에서 확인 가능한지 여부확인 필요!
+3. [Unity_3D_K] 3DUnity 환경의 WebView
+   * 개선점 :  Scene전환시 오류 발생 , 성능 개선 필요
+4. [Unity_3D_S] 포톤서버 농구 게임
+   * 미확인
+5. [Unity_WebGL_K] WebGL로 빌드하여 Oculus Browser에서 web에서 가상환경으로 전환 가능 
+   * 개선점 : 잡는 기능밖에 안됨 , loading속도 매우 느림
+6. [Node.js_Web_K] Aframe을 활용하여 WebVR 구현
    * Oculus Browser 환경에서 구현 사이트 접속시 Unity에서 구현한 Interaction 구현 가능(잡기 텔레포트 이동) 
    * Socket을 활용한 멀티 접속
       * 개선점 : Room 별로 사용자 입장
    * Import custom 3D model
       * 개선점 : Heroku[서버]이용시 3Dmodel Load하는 시간이 많이 소모 >> AWS S3 , multer-s3를 활용하여 resize[lamda]을 활용하여 속도 개선 필요 
-6. [Node.js_React_Web_K] React를 사용하여 360페이지 제작
-7. 
+   * React-aframe
+      * 개선점 : aframe = 1.0.4 버전이하로 Oculus Browser에서 가상환경으로 전환되지 않음 , webpack을 사용했기 때문에 성능개선은 되지만 복잡성 높아짐
+      * 기존의 코드보다 유지보수 , 재활용성이 기존에 구현방식과 비교하여 좋음
+7. [Node.js_React_Web_K] React를 사용하여 360페이지 제작
+   * Webpack , babel
+8. [Cloud Hosting service] Heroku , AWS 사용
+   * Heroku
+      * 무료 클라우드 호스팅 업체임으로 속도 느림 [테스트용 권장]
+   * AWS
+      * 유료 클라우드 호스팅 업체임으로 속도 및 보안 측면에서 우월 , 실제 공모전 , 과제시 사용[실서비스용 권장]
+         * EC2
+         * S3
+9. 
+      
 

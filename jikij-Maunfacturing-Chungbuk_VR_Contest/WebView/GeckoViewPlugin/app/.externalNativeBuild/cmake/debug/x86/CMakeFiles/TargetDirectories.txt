@@ -1,0 +1,2 @@
+C:/unityProject/Museum_Project/GeckoViewPlugin/app/.externalNativeBuild/cmake/debug/x86/CMakeFiles/edit_cache.dir
+C:/unityProject/Museum_Project/GeckoViewPlugin/app/.externalNativeBuild/cmake/debug/x86/CMakeFiles/rebuild_cache.dir

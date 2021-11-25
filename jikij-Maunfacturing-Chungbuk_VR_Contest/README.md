@@ -1,4 +1,7 @@
 # Unity & Oculus Profiler
+* adb란??   
+    Android Debug Bridge는 기기와 통신할 있는 다목적 명령줄 도구입니다.??    
+    adb 멸영어는 앱의 설치 디버깅과 같은 다양한 기기 작업에 도움이 되며 기기에서 다양한 명령어를 실행하는데 사용할 수 있다.
 * Unity와 Oculus연결 하기 위한 방법
 ```
 adb 설치 후
@@ -13,6 +16,11 @@ adb start-server
 adb devices 
 adb tcp:34999 localabstract Uniy-{패키지명}
 ```
+* 유니티 최적화 
+    * 유니티 공식 문서        
+    최종 단계가 아닌 기획 단계 에서 최적화를 고려해야한다.
+    * 렌더링 최적화    
+    ㅇ
 * 위와 같이 설정후 다시 진행한다.
 * 태스트 결과 Rendering에 많은 성능부화가 있음
     * Draw call
